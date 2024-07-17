@@ -19,14 +19,8 @@ jobs:
           registry: ghcr.io
           username: wh1isper
           password: ${{ secrets.PAT }}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/arm/v6,linux/arm/v7,linux/386
-          tags: |
-            ghcr.io/wh1isper/s5cmd:latest
+      - name: Pull and push latest image
+        run: |
+          docker pull peakcom/s5cmd:latest
+          docker tag peakcom/s5cmd:latest ghcr.io/wh1isper/s5cmd:latest
+          docker push ghcr.io/wh1isper/s5cmd:latest
