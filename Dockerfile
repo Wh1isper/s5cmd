@@ -8,3 +8,5 @@ FROM alpine:3.18
 COPY --from=build /s5cmd/s5cmd .
 WORKDIR /aws
 ENTRYPOINT ["/s5cmd"]
+
+LABEL org.opencontainers.image.source https://github.com/Wh1isper/s5cmd
